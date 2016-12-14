@@ -1,0 +1,27 @@
+{
+  "name": "twitter-clone",
+  "version": "1.0.0",
+  "description": "twitter-clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CheBlankenship/twitter-clone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CheBlankenship/twitter-clone/issues"
+  },
+  "homepage": "https://github.com/CheBlankenship/twitter-clone#readme",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "http": "0.0.0",
+    "mongoose": "^4.7.2",
+    "node-dev": "^3.1.3"
+  }
+}
