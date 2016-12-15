@@ -10,43 +10,57 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-app.get('/profile', function(req, res) {
- var theUserID = 'robrobrob';
- bluebird.all([
-   User.findById(theUserID),
-   Tweet.find({ userID: theUserID })
-   .then(function(tweets) {
-     res.json(
-       tweets
-     );
-   })
- ]);
-});
-//
-// app.post('/', function(req, res) {
-//  var theUserID = req.body.userID;
-//  console.log(theUserID);
-// });
-
-var User = mongoose.model("User", {
- _id: String, // actually the username
- website: String,
- avatar_url: String
+app.get('/profile/:userID', function(req, res) {
+  var theUserID = req.params.userID;
+  bluebird.all([
+    User.findById(theUserID),
+    Tweet.find({ userID: theUserID })
+    .then(function(tweets) {
+      res.json(
+        tweets
+      );
+    })
+  ]);
 });
 
-var Tweet = mongoose.model("Tweet", {
- text: String,
- timestamp: Date,
- userID: String // points to User._id
+app.get('/user_info/:userID', function(req, res) {
+  var theUserID = req.params.userID;
+  Follow.find({ follower: theUserID })
+    .then(function(follows) {
+      var followingIds = follows.map(function(follow) {
+        return follow.following;
+      });
+      // find all following's tweets
+      return Tweet.find({
+        userID: {
+          $in: followingIds.concat([theUserID])
+        }
+      });
+    })
+    .then(function(tweets) {
+      res.json(tweets);
+    });
 });
 
-var Follow = mongoose.model("Follow", {
- follower: String,
- following: String
+const User = mongoose.model("User", {
+  _id: String, // actually the username
+  website: String,
+  avatar_url: String
+});
+
+const Tweet = mongoose.model("Tweet", {
+  text: String,
+  timestamp: Date,
+  userID: String // points to User._id
+});
+
+const Follow = mongoose.model("Follow", {
+  follower: String,
+  following: String
 });
 
 app.listen(3000, function() {
- console.log('Listening on 3000');
+  console.log('Listening on 3000');
 });
 
 // User.create({

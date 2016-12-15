@@ -2,14 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>home</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.js"></script>
-    <script src="/angular-ui-router.js"></script>
-    <!-- <script src="angular-cookies.min.js"></script> -->
+    <script src="angular.js"></script>
+    <script src="angular-ui-router.js"></script>
     <script src="frontend.js"></script>
+    <title>Tweeter</title>
   </head>
   <body ng-app="Twitter">
-    <h1>{{twits}}</h1>
-    <ui-router></ui-router>
+    <h1>Welcome to Tweeter</h1>
+    <input type="text" ng-model="searchUser" value="">
+    <a ui-sref="profile({userID: searchUser})"><button type="button" name="button">Search</button></a>
+    <ui-view></ui-view>
   </body>
+
 </html>
