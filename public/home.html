@@ -1,4 +1,8 @@
 <h2>Home</h2>
+<form ng-if="loginState === true" method="post" ng-submit="tweet(text)">
+  <input type="text" ng-model="text">
+  <button type="Submit">Tweet it, dog</button>
+</form>
 <ul ng-repeat="tweet in tweets">
   <p>{{tweet.userID}}</p>
   <p>{{tweet.text}}</p>

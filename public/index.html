@@ -4,13 +4,20 @@
     <meta charset="utf-8">
     <script src="angular.js"></script>
     <script src="angular-ui-router.js"></script>
+    <script src="angular-cookies.min.js"></script>
     <script src="frontend.js"></script>
     <title>Tweeter</title>
   </head>
   <body ng-app="Twitter">
     <h1>Welcome to Tweeter</h1>
+
     <input type="text" ng-model="searchUser" value="">
     <a ui-sref="profile({userID: searchUser})"><button type="button" name="button">Search</button></a>
+    <a ui-sref="login()" ng-if="loginState === false"><button>Login</button></a>
+    <button ng-click="logout()" ng-if="loginState === true">Logout</button>
+    <a ui-sref="signup()" ng-if="loginState === false"><button>Signup</button></a>
+    <br>
+
     <ui-view></ui-view>
   </body>
 

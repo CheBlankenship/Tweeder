@@ -1,11 +1,13 @@
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/Twitter");
 var bluebird = require("bluebird");
-mongoose.promise = bluebird;
+mongoose.Promise = bluebird;
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var bodyParser = require('body-parser');
+const token = "define it later";
+const uuid = require("node-uuid");
 
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -21,6 +23,45 @@ app.get('/profile/:userID', function(req, res) {
       );
     })
   ]);
+});
+
+app.get('/userLogin/:userId/:password', function(req, res) {
+  var theUserID = req.params.userId;
+  var password = req.params.password;
+  bluebird.all([
+    User.findById(theUserID)
+    .then(function(userId) {
+      if (userId !== null) {
+        if (userId.password === password) {
+          res.json({
+            token: userId.token
+          });
+        }
+        else {
+          var nope = 'nope';
+          res.json (
+            nope
+          );
+        }
+      }
+      else if (userId === null){
+        res.json(
+          userId
+        );
+      }
+    })
+  ]);
+});
+
+app.post('/signup', function(req, res) {
+  console.log(req.body);
+  User.create({
+    _id: req.body._id,
+    password: req.body.password,
+    website: req.body.website,
+    avatar_url: req.body.avatar_url,
+    token: uuid.v4()
+  });
 });
 
 app.get('/user_info/:userID', function(req, res) {
@@ -42,10 +83,23 @@ app.get('/user_info/:userID', function(req, res) {
     });
 });
 
+app.post('/tweet/:userID/:text', function(req, res) {
+  Tweet.create({
+    text: req.params.text,
+    timestamp: new Date(),
+    userID: req.params.userID
+  })
+  .then(function(res) {
+    console.log(res);
+  });
+});
+
 const User = mongoose.model("User", {
   _id: String, // actually the username
+  password: String,
   website: String,
-  avatar_url: String
+  avatar_url: String,
+  token:String
 });
 
 const Tweet = mongoose.model("Tweet", {
