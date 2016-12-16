@@ -25,6 +25,17 @@ app.get('/profile/:userID', function(req, res) {
   ]);
 });
 
+app.get('/world/timeline', function(req,res) {
+  Tweet.find()
+  .then(function(tweets) {
+    console.log('Timeline: ', tweets);
+    res.json(
+      tweets
+    );
+  });
+});
+
+
 app.get('/userLogin/:userId/:password', function(req, res) {
   var theUserID = req.params.userId;
   var password = req.params.password;
@@ -64,22 +75,15 @@ app.post('/signup', function(req, res) {
   });
 });
 
-app.get('/user_info/:userID', function(req, res) {
+
+app.get('/subfriends/:userID', function(req, res) {
+  // add the userID to the button
   var theUserID = req.params.userID;
-  Follow.find({ follower: theUserID })
+  Follow.find({follower: theUserID})
     .then(function(follows) {
-      var followingIds = follows.map(function(follow) {
-        return follow.following;
-      });
-      // find all following's tweets
-      return Tweet.find({
-        userID: {
-          $in: followingIds.concat([theUserID])
-        }
-      });
-    })
-    .then(function(tweets) {
-      res.json(tweets);
+      res.json(
+        follows
+      );
     });
 });
 
@@ -93,6 +97,25 @@ app.post('/tweet/:userID/:text', function(req, res) {
     console.log(res);
   });
 });
+
+app.post('/follow', function(req, res) {
+  Follow.create(
+    {
+      follower: req.body.followerId,
+      following: req.body.followingId
+    }
+  )
+  .then(function(res) {
+    console.log(res.followerID + ' is following', res.followingID);
+    console.log("All data" + res);
+    res.json(res);
+  })
+  .catch(function(err) {
+    console.log('Error: ', err.message);
+  });
+});
+
+
 
 const User = mongoose.model("User", {
   _id: String, // actually the username

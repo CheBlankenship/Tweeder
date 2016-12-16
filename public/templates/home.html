@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<h2>Home</h2>
+<form ng-if="loginState === true" method="post" ng-submit="tweet(text)">
+  <input type="text" ng-model="text" class="look" placeholder="twoweed">
+  <button type="Submit">TwoWeed</button>
+</form>
+<div class="row container-fluid">
+    <h1 clss="col-xs-12" class="you">
+      {{userId}}
+    </h1>
+</div>
+<div class="container-fluid">
+  <ul ng-repeat="tweet in tweets" class="twt">
+    <a ui-sref="profile({userID: tweet.userID})" class="user"><h2>{{tweet.userID}}</h2></a>
+    <h4>{{tweet.text}}</h4>
+    <h5>{{tweet.timestamp | date:'medium'}}</h5>
+  </ul>
+</div>

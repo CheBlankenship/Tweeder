@@ -1,0 +1,84 @@
+/*html{
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}*/
+body.ng-scope{
+  background-color: #009999;
+  /*background-image: url('../img/blue.jpg');*/
+  /*height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;*/
+
+}
+h1{
+  font-size: 90px;
+  text-align: center;
+}
+
+button{
+  background-color: white;
+  color: black;
+  font-family: impact;
+  border-radius: 20px;
+  border: 1px solid white;
+  font-size: 30px;
+}
+
+button:focus {
+  outline:0;
+}
+
+.look{
+  height:40px;
+  width: 400px;
+  border-radius: 20px;
+  border: 1px solid lightblue;
+}
+
+.look:focus{
+  outline:0;
+
+}
+
+.follow{
+  background-color: #0066cc;
+  color: white;
+}
+
+.userid{
+  display: inline-block;
+  font-size: 50px;
+  background-color: lightgray;
+  border-radius: 20px;
+}
+
+.user{
+  display: inline-block;
+}
+
+.twt{
+  background-color: rgba(255, 255, 255, 0.4);;
+  padding: 5px;
+  text-align: center;
+  border-radius: 20px;
+  padding-top:70px;
+  padding-bottom: 70px;
+}
+
+.search{
+  height: 100px;
+}
+
+h2.followingusers.ng-binding{
+  background-color: white;
+  border-radius: 20px;
+}
+
+.you{
+  background-color: rgba(255,255,255,0.4);
+  height: 200px;
+  width: 400px;
+  border-radius: 60px;
+  float: left;
+}
