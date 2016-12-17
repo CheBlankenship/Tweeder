@@ -32,11 +32,11 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
     });
   };
 
-  service.getUserInfo = function(userID) {
-    return $http ({
-      url: '/user_info/' + userID
-    });
-  };
+  // service.getUserInfo = function(userID) {
+  //   return $http ({
+  //     url: '/user_info/' + userID
+  //   });
+  // };
 
 // get subs!
   service.getSubfriends = function(userID) {
@@ -91,10 +91,12 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
     $scope.userId = $cookies.get('userId');
     TwitterApi.getProfile($scope.userId).success(function(result) {
       $scope.tweets = result;
+      console.log($scope.tweets);
     })
     .error(function(err) {
       console.log('Error: ', err.message);
     });
+
 
     $scope.tweet = function(text) {
       TwitterApi.createTweet($scope.userId, text).success(function(res) {
@@ -102,6 +104,15 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
       });
       $state.go('home', {}, {reload: true});
     };
+
+    $scope.friendsState = false;
+    $scope.showSubfriend = function() {
+      TwitterApi.getSubfriends($scope.userId).success(function(results) {
+        $scope.friendsState = true;
+        $scope.results = results;
+      });
+    };
+
   }
 
   else if($rootScope.loginState === false) {
@@ -127,12 +138,11 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
       console.log('Error: ', err.message);
     });
 
-    $scope.tweet = function(text) {
-      TwitterApi.createTweet($scope.userId, text).success(function(res) {
-        console.log('Tweeted successfully');
-      });
-    $state.go('home', {}, {reload: true});
-    };
+    // $scope.tweet = function(text) {
+    //   TwitterApi.createTweet($scope.userId, text).success(function(res) {
+    //     console.log('Tweeted successfully');
+    //   });
+    // $state.go('home', {}, {reload: true});
 
     $scope.normal = true;
     $scope.showSubfriend = function() {

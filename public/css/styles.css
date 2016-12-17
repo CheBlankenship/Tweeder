@@ -4,63 +4,118 @@
   background-size: cover;
 }*/
 body.ng-scope{
-  background-color: #009999;
+  /*background-color: #009999;*/
   /*background-image: url('../img/blue.jpg');*/
   /*height: 100%;
   background-repeat: no-repeat;
   background-size: cover;*/
 
 }
+
+img{
+  height: 120px;
+  width: 120px;
+}
+
+
 h1{
   font-size: 90px;
   text-align: center;
 }
 
-button{
+ul{
+  list-style: none;
+}
+
+/*button{
   background-color: white;
   color: black;
   font-family: impact;
   border-radius: 20px;
   border: 1px solid white;
   font-size: 30px;
-}
+}*/
 
 button:focus {
   outline:0;
 }
 
-.look{
-  height:40px;
-  width: 400px;
+.placeholder{
+  color: #009999;
+}
+
+.searchBtn{
+  background-color: white;
+  border: 4px solid gray;
   border-radius: 20px;
-  border: 1px solid lightblue;
+  font-size: 30px;
+  color: #009999;
+}
+
+.title{
+  color: #009999;
+  background-color: rgba(125, 125, 125, 0.2);
+  font-size: 100px;
+}
+
+.look{
+  height:60px;
+  width: 600px;
+  border-radius: 20px;
+  border: 4px solid gray;
+  text-align: center;
+  font-size: 30px;
 }
 
 .look:focus{
   outline:0;
-
 }
 
 .follow{
-  background-color: #0066cc;
-  color: white;
+  background-color: white;
+  color: #009999;
+  padding: 10px 30px 10px;
+  font-size: 20px;
+  border: 4px solid gray;
+  border-radius: 20px;
 }
+
+.followBtn{
+  color: white;
+  background-color: #009999;
+
+}
+
+
 
 .userid{
   display: inline-block;
   font-size: 50px;
-  background-color: lightgray;
-  border-radius: 20px;
 }
 
 .user{
   display: inline-block;
 }
 
+/*div.row.wrap.ng-scope{
+  display: inline-block;
+  text-align: center;
+}*/
+
+.profile{
+  background-color: rgba(124, 124, 124, 0.2);
+  /*padding: 5px;*/
+  /*border: 4px solid lightgray;*/
+  /*border-radius: 20px;*/
+  text-align: center;
+  /*display: inline-block;*/
+}
+
 .twt{
-  background-color: rgba(255, 255, 255, 0.4);;
+  background-color: rgba(124, 124, 124, 0.2);
   padding: 5px;
   text-align: center;
+  /*border: 4px solid lightgray;*/
   border-radius: 20px;
   padding-top:70px;
   padding-bottom: 70px;
@@ -68,11 +123,16 @@ button:focus {
 
 .search{
   height: 100px;
+  text-align: center;
 }
 
-h2.followingusers.ng-binding{
-  background-color: white;
+ul.followingUsers.ng-scope{
+  border: 4px solid gray;
   border-radius: 20px;
+}
+
+h1.ng-binding{
+  display: inline-block;
 }
 
 .you{
@@ -81,4 +141,13 @@ h2.followingusers.ng-binding{
   width: 400px;
   border-radius: 60px;
   float: left;
+}
+
+.jacket{
+  background-color: white;
+  border-radius: 10px;
+}
+
+.profile{
+  background-color: white;
 }

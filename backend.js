@@ -79,7 +79,7 @@ app.post('/signup', function(req, res) {
 
 app.get('/subfriends/:userID', function(req, res) {
   // add the userID to the button
-  var theUserID = req.params.userID;
+  var theUserID = req.params.userID || req.body.userID;
   Follow.find({follower: theUserID})
     .then(function(follows) {
       res.json(

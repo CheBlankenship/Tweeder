@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <!-- When u search  -->
-<div class="row">
-  <div class="col-xs-12">
+<div class="row wrap">
+  <div class="col-xs-12 profile">
+    <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
     <h3 class="userid">{{tweets[0].userID}}</h3>
-    <button class="follow" ng-if="loginState === true" ng-click="follow(tweets[0].userID)">Follow</button>
-    <button class="weed" ng-if="loginState === true" ng-click="showSubfriend(tweets[0].userID)">following friends</button>
+    <button class="follow followBtn" ng-if="loginState === true" ng-click="follow(tweets[0].userID)">Follow</button>
+    <button class="follow followBtn" ng-if="loginState === true" ng-click="follow(tweets[0].userID)">Following</button>
+    <button class="follow" ng-if="loginState === true" ng-click="showSubfriend(tweets[0].userID)">Friends</button>
   </div>
 </div>
 
@@ -25,8 +27,9 @@
   <!-- see this persons following -->
   <div class="col-xs-12">
     <div class="container-fluid">
-      <ul ng-repeat="subs in subfriend">
-        <h2 class="followingUsers">
+      <ul ng-repeat="subs in subfriend" class="followingUsers">
+        <h2>
+          <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
           {{subs.following}}
         </h2>
       </ul>
