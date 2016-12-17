@@ -105,6 +105,7 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
       $state.go('home', {}, {reload: true});
     };
 
+
     $scope.friendsState = false;
     $scope.showSubfriend = function() {
       TwitterApi.getSubfriends($scope.userId).success(function(results) {
@@ -133,16 +134,29 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
     TwitterApi.getProfile($stateParams.userID).success(function(result) {
       $scope.tweets = result;
       console.log($scope.tweets);
+      TwitterApi.getSubfriends($scope.userId).success(function(result) {
+        var len = result.length;
+        console.log(len);
+        console.log(result);
+        $rootScope.followingState = true;
+        console.log($scope.followingState);
+        for(var i=0; i< len; i++){
+          var obj = result[i];
+          console.log(obj.following);
+          var following = obj.following;
+          if($stateParams.userID === obj.following){
+            $rootScope.followingState = false;
+            console.log($rootScope.followingState);
+            // location.reload();
+          }
+        }
+        // console.log(result);
+      });
     })
     .error(function(err) {
       console.log('Error: ', err.message);
     });
 
-    // $scope.tweet = function(text) {
-    //   TwitterApi.createTweet($scope.userId, text).success(function(res) {
-    //     console.log('Tweeted successfully');
-    //   });
-    // $state.go('home', {}, {reload: true});
 
     $scope.normal = true;
     $scope.showSubfriend = function() {
@@ -158,8 +172,9 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
       TwitterApi.followUser($cookies.get('userId'),following).success(function(statement) {
         $scope.res = statement;
         console.log($scope.res);
+        console.log($rootScope.followingState);
         });
-        $state.go('home', {}, {reload: true});
+        $state.go('profile', {}, {reload: true});
       };
 });
 

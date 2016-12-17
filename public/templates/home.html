@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<h2>Home</h2>
-<form ng-if="loginState === true" method="post" ng-submit="tweet(text)">
-  <input type="text" ng-model="text" class="look" placeholder="twoweed">
-  <button type="Submit">tweed</button>
-</form>
-<div class="row container-fluid">
-    <h1 clss="col-xs-12 you">
-      <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
-      {{userId}}
-    </h1>
-    <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Friends</button>
-</div>
-<div class="container-fluid">
-  <ul ng-if="friendsState === true">
-    <li ng-repeat="result in results" class="twt">
-      {{result.following}}
-    </li>
-  </ul>
-  <ul ng-if="friendsState === false">
-    <li ng-repeat="tweet in tweets" class="twt">
-      <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/><a ui-sref="profile({userID: tweet.userID})" class="user"><h2>{{tweet.userID}}</h2></a><h4>{{tweet.text}}</h4><h5>{{tweet.timestamp | date:'medium'}}</h5>
-    </li>
-  </ul>
+<div class="row wrapper">
+  <h2>Home</h2>
+  <form ng-if="loginState === true" method="post" ng-submit="tweet(text)">
+    <input type="text" ng-model="text" class="look" placeholder="twoweed">
+    <button type="Submit">tweed</button>
+  </form>
+      <h1 clss="col-xs-12 you">
+        <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
+        {{userId}}
+      </h1>
+      <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Friends</button>
+    <ul ng-if="friendsState === true">
+      <li ng-repeat="result in results" class="twt">
+        {{result.following}}
+      </li>
+    </ul>
+    <ul ng-if="friendsState === false">
+      <li ng-repeat="tweet in tweets" class="tweet">
+        <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/><a ui-sref="profile({userID: tweet.userID})" class="user"><h2>{{tweet.userID}}</h2></a><h4>{{tweet.text}}</h4><h5>{{tweet.timestamp | date:'medium'}}</h5>
+      </li>
+    </ul>
 </div>

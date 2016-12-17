@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<form method="post" ng-submit="userSignup(userId, password ,website, avatar_url)">
-  <label>username</label>
-  <input type="text" ng-model="userId" value="username">
-  <label>password</label>
-  <input type="text" ng-model="password" value="password">
-  <label>website</label>
-  <input type="text" ng-model="website" value="website">
-  <label>avatar url</label>
-  <input type="text" ng-model="avatar_url" value="avatar_url">
-  <button type="submit">Sign up</button>
-</form>
+<div class="row wrapper">
+  <form method="post" ng-submit="userSignup(userId, password ,website, avatar_url)">
+    <label>username</label>
+    <input type="text" ng-model="userId" value="username">
+    <label>password</label>
+    <input type="text" ng-model="password" value="password">
+    <label>website</label>
+    <input type="text" ng-model="website" value="website">
+    <label>avatar url</label>
+    <input type="text" ng-model="avatar_url" value="avatar_url">
+    <button type="submit">Sign up</button>
+  </form>
+</div>
