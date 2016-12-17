@@ -16,8 +16,9 @@ app.get('/profile/:userID', function(req, res) {
   var theUserID = req.params.userID;
   bluebird.all([
     User.findById(theUserID),
-    Tweet.find({ userID: theUserID })
+    Tweet.find({ userID: theUserID }).sort('-timestamp')
     .then(function(tweets) {
+      console.log(tweets);
       res.json(
         tweets
       );
@@ -26,7 +27,7 @@ app.get('/profile/:userID', function(req, res) {
 });
 
 app.get('/world/timeline', function(req,res) {
-  Tweet.find()
+  Tweet.find().sort('-timestamp')
   .then(function(tweets) {
     console.log('Timeline: ', tweets);
     res.json(
