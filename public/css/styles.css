@@ -178,3 +178,13 @@ h1.ng-binding{
 .backgray{
   background-color: #f1f7f7;
 }
+
+.followNumbers{
+  background-color: #009999;
+  color: white;
+  margin-left: 5px;
+  width: 30px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: inline-block;
+}

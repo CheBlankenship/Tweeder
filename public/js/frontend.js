@@ -32,11 +32,12 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
     });
   };
 
-  // service.getUserInfo = function(userID) {
-  //   return $http ({
-  //     url: '/user_info/' + userID
-  //   });
-  // };
+
+  service.getFollower = function(userID) {
+    return $http({
+      url: '/follower/' + userID
+    });
+  };
 
 // get subs!
   service.getSubfriends = function(userID) {
@@ -105,12 +106,27 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
       $state.go('home', {}, {reload: true});
     };
 
+    TwitterApi.getSubfriends($scope.userId).success(function(results) {
+      $scope.results = results;
+      console.log($scope.results);
+      $scope.number = results.length;
+    });
+
+    TwitterApi.getFollower($scope.userId).success(function(results) {
+      $scope.followers = results;
+      $scope.numberOfFollowers = results.length;
+      console.log($scope.numberOfFollowers);
+    });
 
     $scope.friendsState = false;
+    console.log($scope.friendsState);
     $scope.showSubfriend = function() {
       TwitterApi.getSubfriends($scope.userId).success(function(results) {
         $scope.friendsState = true;
+        console.log($scope.friendsState);
         $scope.results = results;
+        console.log($scope.results);
+        $scope.number = results.length;
       });
     };
 
@@ -119,7 +135,6 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
   else if($rootScope.loginState === false) {
     TwitterApi.getWorldtimeline().success(function(result) {
       $scope.tweets = result;
-      console.log($scope.tweets);
     });
   }
 
