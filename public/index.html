@@ -8,23 +8,26 @@
     <script src="js/angular-cookies.min.js"></script>
     <script src="js/frontend.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Harmattan" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
     <title>tweeder</title>
   </head>
   <body ng-app="Twitter">
     <div class="container-fluid">
       <div class="row">
-        <h1 class="col-xs-12 title">tweeder</h1>
+        <h1 class="col-xs-12 title">tweeder
+        <img src="img/jacket.svg" alt="jacket_icon" class="title-jacket"/>
+        <input class="look" type="text" ng-model="searchUser" value="" placeholder="search user">
+        <a ui-sref="profile({userID: searchUser})"><button type="button" name="button" class="follow">Search</button></a>
+        </h1>
       </div>
 
       <div class="row">
         <div class="col-xs-12 search">
-          <a ui-sref="home()"><button type="button" name="button" class="searchBtn">Home</button></a>
-          <a ui-sref="login()" ng-if="loginState === false"><button class="searchBtn">Login</button></a>
-          <button ng-click="logout()" ng-if="loginState === true" class="searchBtn">Logout</button>
-          <a ui-sref="signup()" ng-if="loginState === false"><button class="searchBtn">Signup</button></a>
-          <input class="look" type="text" ng-model="searchUser" value="" placeholder="search user">
-          <a ui-sref="profile({userID: searchUser})"><button type="button" name="button" class="searchBtn">Search</button></a>
+          <a ui-sref="home()"><button type="button" name="button" class="follow">Home</button></a>
+          <a ui-sref="login()" ng-if="loginState === false"><button class="follow">Login</button></a>
+          <button ng-click="logout()" ng-if="loginState === true" class="follow">Logout</button>
+          <a ui-sref="signup()" ng-if="loginState === false"><button class="follow">Signup</button></a>
         </div>
       </div>
       <ui-view></ui-view>

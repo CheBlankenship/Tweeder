@@ -7,7 +7,7 @@
         <h3 class="userid">{{tweets[0].userID}}</h3>
         <button class="follow followBtn" ng-if="loginState === true && followingState === true"
        ng-click="follow(tweets[0].userID)">Follow</button>
-        <button class="follow followBtn followingBtn" ng-if="loginState === true && followingState !== true"
+        <button class="follow" ng-if="loginState === true && followingState !== true"
      ng-click="follow(tweets[0].userID)">Following</button>
         <button class="follow" ng-if="loginState === true" ng-click="showSubfriend(tweets[0].userID)">Friends</button>
       </div>
