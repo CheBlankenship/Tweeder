@@ -88,6 +88,13 @@ app.get('/subfriends/:userID', function(req, res) {
     });
 });
 
+// app.get('/follower/:userID', function(req, res) {
+//   var urID = req.body.userID;
+//   Follow.find({follower: urID});
+//
+// });
+
+
 app.post('/tweet/:userID/:text', function(req, res) {
   Tweet.create({
     text: req.params.text,

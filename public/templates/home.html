@@ -4,7 +4,8 @@
         <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
         {{userId}}
       </h1>
-      <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Friends</button>
+      <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow</button>
+      <button class="follow" ng-if="loginState === true" ng-click="showFollowers()">Follower</button>
       <form ng-if="loginState === true" method="post" ng-submit="tweet(text)" class="tweetbar">
         <input type="text" ng-model="text" class="look" placeholder="tweed">
         <button type="Submit" class="follow tweed">tweed</button>

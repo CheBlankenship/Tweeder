@@ -28,6 +28,11 @@ img{
   margin-top: 10px;
 }
 
+.fa .fa-user-plus{
+  height: 50px;
+  width: 50px;
+}
+
 
 ul{
   list-style: none;
@@ -72,11 +77,12 @@ button:focus {
 
 
 .follow{
-  background-color: white;
+  background-color: #f1f7f7;
+  /*background-color: white;*/
   color: black;
   padding: 10px 30px 10px;
   font-size: 20px;
-  border: 0.5px solid gray;
+  border: 0.5px solid #f1f7f7;
   border-radius: 20px;
 }
 

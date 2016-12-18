@@ -6,10 +6,12 @@
         <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
         <h3 class="userid">{{tweets[0].userID}}</h3>
         <button class="follow followBtn" ng-if="loginState === true && followingState === true"
-       ng-click="follow(tweets[0].userID)">Follow</button>
-        <button class="follow" ng-if="loginState === true && followingState !== true"
-     ng-click="follow(tweets[0].userID)">Following</button>
-        <button class="follow" ng-if="loginState === true" ng-click="showSubfriend(tweets[0].userID)">Friends</button>
+       ng-click="follow(tweets[0].userID)">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+        </button>
+        <button class="follow" ng-if="loginState === true && followingState !== true" ng-click="follow(tweets[0].userID)">Following</button>
+        <button class="follow" ng-if="loginState === true" ng-click="follow(tweets[0].userID)">Follower</button>
+        <button class="follow" ng-if="loginState === true" ng-click="showSubfriend(tweets[0].userID)">Follow</button>
       </div>
     </div>
 
