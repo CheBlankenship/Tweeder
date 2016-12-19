@@ -4,18 +4,26 @@
         <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
         {{userId}}
       </h1>
+      <button class="follow" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
       <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
       <button class="follow" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
       <form ng-if="loginState === true" method="post" ng-submit="tweet(text)" class="tweetbar">
         <input type="text" ng-model="text" class="look" placeholder="tweed">
         <button type="Submit" class="follow tweed">tweed</button>
       </form>
-    <ul ng-if="friendsState === true">
-      <li ng-repeat="result in results" class="twt">
-        {{result.following}}
+    <ul ng-if="followingUserState === true && tweedState === false && followerState === false">
+      <li ng-repeat="result in results" class="tweet">
+        <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
+        <a ui-sref="profile({userID: tweet.userID})" class="user">{{result.following}}</a>
       </li>
     </ul>
-    <ul ng-if="friendsState === false">
+    <ul ng-if="followingUserState === false && tweedState === false && followerState === true">
+      <li ng-repeat="follower in followers" class="tweet">
+        <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
+        <a ui-sref="profile({userID: tweet.userID})" class="user">{{follower.follower}}</a>
+      </li>
+    </ul>
+    <ul ng-if="followingUserState === false && tweedState === true && followerState === false">
       <li ng-repeat="tweet in tweets" class="tweet">
         <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
         <a ui-sref="profile({userID: tweet.userID})" class="user"><h2>{{tweet.userID}}</h2></a>

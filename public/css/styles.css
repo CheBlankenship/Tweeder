@@ -47,7 +47,7 @@ button:focus {
 
 .title{
   color: #009999;
-  background-color: rgba(125, 125, 125, 0.3);
+  background-color: #f1f7f7;
   font-size: 100px;
   /*text-align: center;*/
 }
@@ -84,6 +84,14 @@ button:focus {
   font-size: 20px;
   border: 0.5px solid #f1f7f7;
   border-radius: 20px;
+}
+
+.following{
+  background-color: white;
+}
+
+.follower{
+  background-color: red;
 }
 
 

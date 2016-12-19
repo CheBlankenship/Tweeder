@@ -3,6 +3,7 @@ var app = angular.module('Twitter', ['ui.router', 'ngCookies']);
 app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, $state) {
   var service = {};
 
+  //Login
   if ($cookies.get('token')) {
     $rootScope.loginState = true;
   }
@@ -10,6 +11,10 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
   else if (!$cookies.get('token')) {
     $rootScope.loginState = false;
   }
+
+
+
+  //-------------------------------
 
   $rootScope.logout = function() {
     console.log('Logout');
@@ -39,7 +44,7 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
     });
   };
 
-// get subs!
+// get following people!
   service.getSubfriends = function(userID) {
     return $http({
       url: '/subfriends/' + userID
@@ -74,7 +79,7 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
 
   service.followUser = function(follower, following) {
     return $http({
-      url: '/follow',
+      url: '/follow/' + userID,
       method: 'POST',
       data: {
         followerId: follower,
@@ -89,9 +94,17 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
 
 app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, $rootScope) {
   if($rootScope.loginState === true){
+    $scope.tweedState = true;
+    $scope.followerState = false;
+    $scope.followingUserState = false;
+    console.log($scope.followerState);
+    console.log($scope.followingUserState);
+    console.log($scope.tweedState);
+
     $scope.userId = $cookies.get('userId');
     TwitterApi.getProfile($scope.userId).success(function(result) {
       $scope.tweets = result;
+      $scope.tweedsMount = result.length;
       console.log($scope.tweets);
     })
     .error(function(err) {
@@ -106,6 +119,7 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
       $state.go('home', {}, {reload: true});
     };
 
+
     TwitterApi.getSubfriends($scope.userId).success(function(results) {
       $scope.results = results;
       console.log($scope.results);
@@ -118,18 +132,41 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
       console.log($scope.numberOfFollowers);
     });
 
-    $scope.friendsState = false;
-    console.log($scope.friendsState);
+    // change tweeds, follow and folower by using ng-if
+
+
+    $scope.showFollowers = function(){
+      TwitterApi.getFollower($scope.userId).success(function(results) {
+        $scope.followerState = true;
+        $scope.followingUserState = false;
+        $scope.tweedState = false;
+        $scope.followers = results;
+        console.log($scope.followers);
+        $scope.numberOfFollowers = results.length;
+        console.log($scope.numberOfFollowers);
+      });
+    };
+
     $scope.showSubfriend = function() {
       TwitterApi.getSubfriends($scope.userId).success(function(results) {
-        $scope.friendsState = true;
-        console.log($scope.friendsState);
+        $scope.followingUserState = true;
+        $scope.followerState = false;
+        $scope.tweedState = false;
         $scope.results = results;
         console.log($scope.results);
         $scope.number = results.length;
       });
     };
 
+
+
+    $scope.tweeds = function() {
+      $scope.followingUserState = false;
+      $scope.followerState = false;
+      $scope.tweedState = true;
+      // location.reload();
+    };
+    // ------------- swich using ig-if ------------------
   }
 
   else if($rootScope.loginState === false) {
@@ -146,51 +183,70 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
   if($rootScope.loginState === true){
     $scope.userId = $cookies.get('userId');
     console.log($scope.userId);
+    TwitterApi.getSubfriends($stateParams.userID).success(function(results) {
+      $scope.results = results;
+      console.log("People this person following ", results);
+      $scope.number = results.length;
+    });
+    // show the folllower for that person
+    TwitterApi.getFollower($stateParams.userID).success(function(results) {
+      $scope.followers = results;
+      console.log("Line 193 get Follower ", results);
+      $scope.numberOfFollowers = results.length;
+      console.log("number of followers ", $scope.numberOfFollowers);
+    });
+    // When I click, it gets the follower persons info and shows it
+    $scope.showFollowers = function(){
+      console.log("IM clicking this btn");
+      TwitterApi.getFollower($stateParams.userID).success(function(getFollower) {
+        $scope.followers = getFollower;
+        console.log("getting follower info ", $scope.followers);
+      });
+    };
     TwitterApi.getProfile($stateParams.userID).success(function(result) {
       $scope.tweets = result;
+      $scope.tweedsMount = result.length;
       console.log($scope.tweets);
-      TwitterApi.getSubfriends($scope.userId).success(function(result) {
-        var len = result.length;
-        console.log(len);
+      TwitterApi.getSubfriends($stateParams.userID).success(function(result) {
+        console.log();
+        $scope.len = result.length;
+        var leng = result.length;
+        console.log($scope.len);
         console.log(result);
         $rootScope.followingState = true;
         console.log($scope.followingState);
-        for(var i=0; i< len; i++){
+        for(var i=0; i< leng; i++){
           var obj = result[i];
-          console.log(obj.following);
-          var following = obj.following;
+          $scope.following = obj.following;
           if($stateParams.userID === obj.following){
             $rootScope.followingState = false;
             console.log($rootScope.followingState);
             // location.reload();
           }
         }
-        // console.log(result);
       });
     })
     .error(function(err) {
       console.log('Error: ', err.message);
     });
-
-
-    $scope.normal = true;
-    $scope.showSubfriend = function() {
+// $scope.normal = true;
+      $scope.showSubfriend = function() {
       TwitterApi.getSubfriends($stateParams.userID).success(function(sub) {
         $scope.normal = false;
         $scope.subfriend = sub;
         console.log($scope.subfriend);
-        });
+      });
+    };
+// follow a user
+      $scope.follow = function() {
+        TwitterApi.followUser($cookies.get('userId'), $stateParams.userID).success(function(statement) {
+          console.log("CHECK IF IM IN THIS PLACE WHEN I CLICK FOLLOW");
+          console.log(statement);
+          console.log($rootScope.followingState);
+          });
+          $state.go('profile', {}, {reload: true});
       };
     }
-
-    $scope.follow = function(following) {
-      TwitterApi.followUser($cookies.get('userId'),following).success(function(statement) {
-        $scope.res = statement;
-        console.log($scope.res);
-        console.log($rootScope.followingState);
-        });
-        $state.go('profile', {}, {reload: true});
-      };
 });
 
 app.controller('LoginController', function($scope, $stateParams, $state, $cookies, TwitterApi, $rootScope) {

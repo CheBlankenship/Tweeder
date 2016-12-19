@@ -89,7 +89,7 @@ app.get('/subfriends/:userID', function(req, res) {
 });
 
 app.get('/follower/:userID', function(req, res) {
-  var theUserID = req.params.userID;
+  var theUserID = req.params.userID || req.body.userID;
   console.log(theUserID);
   Follow.find({following: theUserID})
   .then(function(results) {
@@ -112,11 +112,12 @@ app.post('/tweet/:userID/:text', function(req, res) {
   });
 });
 
-app.post('/follow', function(req, res) {
+app.post('/follow/:userID', function(req, res) {
+  var followUser = req.params.userID;
   Follow.create(
     {
       follower: req.body.followerId,
-      following: req.body.followingId
+      following: req.body.followingId || followUser
     }
   )
   .then(function(res) {

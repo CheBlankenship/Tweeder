@@ -18,8 +18,6 @@
       <div class="row">
         <h1 class="col-xs-12 title">tweeder
         <img src="img/jacket.svg" alt="jacket_icon" class="title-jacket"/>
-        <input class="look" type="text" ng-model="searchUser" value="" placeholder="search user">
-        <a ui-sref="profile({userID: searchUser})"><button type="button" name="button" class="follow">Search</button></a>
         </h1>
       </div>
 
@@ -29,6 +27,8 @@
           <a ui-sref="login()" ng-if="loginState === false"><button class="follow">Login</button></a>
           <button ng-click="logout()" ng-if="loginState === true" class="follow">Logout</button>
           <a ui-sref="signup()" ng-if="loginState === false"><button class="follow">Signup</button></a>
+          <input class="look" type="text" ng-model="searchUser" value="" placeholder="search user">
+          <a ui-sref="profile({userID: searchUser})"><button type="button" name="button" class="follow">Search</button></a>
         </div>
       </div>
       <ui-view></ui-view>
