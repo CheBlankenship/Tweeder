@@ -5,8 +5,8 @@
         {{userId}}
       </h1>
       <button class="follow" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
-      <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
       <button class="follow" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
+      <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
       <form ng-if="loginState === true" method="post" ng-submit="tweet(text)" class="tweetbar">
         <input type="text" ng-model="text" class="look" placeholder="tweed">
         <button type="Submit" class="follow tweed">tweed</button>
