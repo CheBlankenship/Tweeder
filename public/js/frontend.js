@@ -185,6 +185,14 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
     $scope.userId = $cookies.get('userId');
     console.log($scope.userId);
 
+    $scope.tweedState = true;
+    $scope.followerState = false;
+    $scope.followingUserState = false;
+    console.log("first difinishion ", $scope.followerState);
+    console.log("first difinishion ", $scope.followingUserState);
+    console.log("first difinishion ", $scope.tweedState);
+
+
     TwitterApi.getSubfriends($stateParams.userID).success(function(results) {
       $scope.results = results;
       console.log("People this person following ", results);
@@ -212,8 +220,15 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
     $scope.showFollowers = function(){
       console.log("IM clicking this btn");
       TwitterApi.getFollower($stateParams.userID).success(function(getFollower) {
-        $scope.followers = getFollower;
+        $scope.getfollowers = getFollower;
+        $scope.tweedState = false;
+        $scope.followerState = true;
+        $scope.followingUserState = false;
+        console.log("getfollower difinishion ", $scope.followerState);
+        console.log("getfollower difinishion ", $scope.followingUserState);
+        console.log("getfollower difinishion ", $scope.tweedState);
         console.log("getting follower info ", $scope.followers);
+        console.log(getFollower);
       });
     };
 
@@ -244,12 +259,16 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
     .error(function(err) {
       console.log('Error: ', err.message);
     });
-// $scope.normal = true;
       $scope.showSubfriend = function() {
       TwitterApi.getSubfriends($stateParams.userID).success(function(sub) {
-        $scope.normal = false;
+        $scope.tweedState = false;
+        $scope.followerState = false;
+        $scope.followingUserState = true;
+        console.log("followeing friends difinishion ", $scope.followerState);
+        console.log("followeing friends difinishion ", $scope.followingUserState);
+        console.log("followeing friends difinishion ", $scope.tweedState);
         $scope.subfriend = sub;
-        console.log($scope.subfriend);
+        // console.log($scope.subfriend);
       });
     };
 // follow a user then change the statement
@@ -257,7 +276,7 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
         TwitterApi.followUser($cookies.get('userId'), $stateParams.userID).success(function(statement) {
           console.log("CHECK IF IM IN THIS PLACE WHEN I CLICK FOLLOW");
           console.log(statement);
-          console.log($rootScope.connectingStatement);
+          // console.log($rootScope.connectingStatement);
           });
           $state.go('profile', {}, {reload: true});
       };

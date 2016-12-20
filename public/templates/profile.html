@@ -11,12 +11,12 @@
         <button class="follow following" ng-if="loginState === true && connectingStatement === false" ng-click="follow(tweets[0].userID)">Following</button>
         <button class="follow" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
         <button class="follow" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
-        <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{len}}</span></button>
+        <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
       </div>
     </div>
 
 
-    <div class="row" ng-show="normal">
+    <div class="row" ng-if="followingUserState === false && tweedState === true && followerState ===false">
       <!-- standart -->
       <ul class="col-xs-12 tweet-list">
         <li class="tweet" ng-repeat="tweet in tweets">
@@ -27,22 +27,19 @@
       </ul>
     </div>
 
-    <div class="row">
-      <ul class="col-xs-12 follower-list">
-        <li ng-repeat="followers in followers">
-          <!-- <h4>{{followers}}</h4> -->
-          <p>
-            check
-          </p>
+    <div class="row" ng-if="followingUserState === false && tweedState === false && followerState ===true">
+      <ul class="col-xs-12">
+        <li class="tweet" ng-repeat="followers in getfollowers">
+          <h4>{{followers.follower}}</h4>
         </li>
       </ul>
     </div>
 
-    <div class="row"  ng-hide="normal">
+    <div class="row" ng-if="followingUserState === true && tweedState === false && followerState ===false">
       <!-- see this persons following -->
       <div class="col-xs-12">
         <ul class="followingUsers">
-          <li ng-repeat="subs in subfriend">
+          <li class="tweet" ng-repeat="subs in subfriend">
             <h2>
               <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
               {{subs.following}}
