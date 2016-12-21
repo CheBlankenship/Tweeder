@@ -8,7 +8,7 @@
         <button class="follow followBtn" ng-if="loginState === true && connectingStatement === true" ng-click="follow()">
           <i class="fa fa-user-plus" aria-hidden="true"></i>
         </button>
-        <button class="follow following" ng-if="loginState === true && connectingStatement === false" ng-click="follow(tweets[0].userID)">Following</button>
+        <button class="follow following" ng-if="loginState === true && connectingStatement === false" ng-click="unfollow()">Following</button>
         <button class="follow" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
         <button class="follow" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
         <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>

@@ -88,6 +88,17 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
       }
     });
   };
+
+  service.unFollowUser = function(follower, following) {
+    return $http({
+      url: '/unfollow/' + follower,
+      method: 'POST',
+      data: {
+        followerId: follower,
+        followingId: following
+      }
+    });
+  };
   return service;
 });
 
@@ -161,12 +172,12 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
 
 
 
-    $scope.tweeds = function() {
-      $scope.followingUserState = false;
-      $scope.followerState = false;
-      $scope.tweedState = true;
-      // location.reload();
-    };
+    // $scope.tweeds = function() {
+    //   $scope.followingUserState = false;
+    //   $scope.followerState = false;
+    //   $scope.tweedState = true;
+    //   // location.reload();
+    // };
     // ------------- swich using ig-if ------------------
   }
 
@@ -232,6 +243,10 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
       });
     };
 
+    $scope.tweeds = function (){
+      location.reload();
+    };
+
     TwitterApi.getProfile($stateParams.userID).success(function(result) {
       $scope.tweets = result;
       $scope.tweedsMount = result.length;
@@ -273,13 +288,26 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
     };
 // follow a user then change the statement
       $scope.follow = function() {
-        TwitterApi.followUser($cookies.get('userId'), $stateParams.userID).success(function(statement) {
+        TwitterApi.followUser($cookies.get('userId'), $stateParams.userID)
+        .success(function(statement) {
           console.log("CHECK IF IM IN THIS PLACE WHEN I CLICK FOLLOW");
           console.log(statement);
           // console.log($rootScope.connectingStatement);
           });
-          $state.go('profile', {}, {reload: true});
+          // $state.go('profile', {}, {reload: true});
+          location.reload();
       };
+
+// unfollow a user then change the statement
+      $scope.unfollow = function() {
+        TwitterApi.unFollowUser($cookies.get('userId'), $stateParams.userID)
+        .success(function(statement) {
+          console.log("CHECK IF IM IN THIS PLACE WHEN I CLICK unFOLLOW");
+          console.log(statement);
+        });
+        location.reload();
+      };
+
     }
 });
 

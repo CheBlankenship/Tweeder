@@ -130,6 +130,40 @@ app.post('/follow/:userID', function(req, res) {
   });
 });
 
+app.post('/unfollow/:userID', function(req, res) {
+  var unfollowUser = req.params.userID;
+  Follow.remove(
+    {
+      follower: req.body.followerId,
+      following: req.body.followingId || unfollowUser
+  }
+)
+.then(function(result) {
+  console.log(result);
+  res.json(result);
+})
+.catch(function(err) {
+  console.log("Error, ", err.message);
+});
+});
+
+// app.post('/unfollow/:userID', fuction(req, res) {
+//   var unfollowUser = req.params.userID;
+//   Follow.remove(
+//     {
+//       follower: req.body.followerId,
+//       following: req.body.followingId || unfollowUser
+//     }
+//   )
+//   .then(function(result) {
+//     console.log(result);
+//     console.log(res.followerId + ' unfollowed ' + res.followingId);
+//     result.json(result);
+//   })
+//   .catch(function(err) {
+//     console.log('Error ', err.message);
+//   });
+// });
 
 
 const User = mongoose.model("User", {
