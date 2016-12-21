@@ -172,12 +172,12 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
 
 
 
-    // $scope.tweeds = function() {
-    //   $scope.followingUserState = false;
-    //   $scope.followerState = false;
-    //   $scope.tweedState = true;
-    //   // location.reload();
-    // };
+    $scope.tweeds = function() {
+      $scope.followingUserState = false;
+      $scope.followerState = false;
+      $scope.tweedState = true;
+      // location.reload();
+    };
     // ------------- swich using ig-if ------------------
   }
 
@@ -195,6 +195,10 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
   if($rootScope.loginState === true){
     $scope.userId = $cookies.get('userId');
     console.log($scope.userId);
+      $scope.userStatement = true;
+    if($stateParams.userID === $cookies.get('userId')) {
+      $scope.userStatement = false;
+    }
 
     $scope.tweedState = true;
     $scope.followerState = false;
@@ -243,8 +247,11 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
       });
     };
 
-    $scope.tweeds = function (){
-      location.reload();
+    $scope.tweeds = function() {
+      $scope.followingUserState = false;
+      $scope.followerState = false;
+      $scope.tweedState = true;
+      // location.reload();
     };
 
     TwitterApi.getProfile($stateParams.userID).success(function(result) {

@@ -5,7 +5,7 @@
       <div class="col-xs-12 profile">
         <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
         <h3 class="userid">{{tweets[0].userID}}</h3>
-        <button class="follow followBtn" ng-if="loginState === true && connectingStatement === true" ng-click="follow()">
+        <button class="follow followBtn" ng-if="loginState === true && connectingStatement === true" ng-click="follow()" ng-show="userStatement">
           <i class="fa fa-user-plus" aria-hidden="true"></i>
         </button>
         <button class="follow following" ng-if="loginState === true && connectingStatement === false" ng-click="unfollow()">Following</button>

@@ -26,7 +26,9 @@
     <ul ng-if="followingUserState === false && tweedState === true && followerState === false">
       <li ng-repeat="tweet in tweets" class="tweet">
         <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
-        <a ui-sref="profile({userID: tweet.userID})" class="user"><h2>{{tweet.userID}}</h2></a>
+        <!-- <a ui-sref="profile({userID: tweet.userID})" class="user"> -->
+        <h2>{{tweet.userID}}</h2>
+        <!-- </a> -->
         <h4>{{tweet.text}}</h4>
         <h5>{{tweet.timestamp | date:'medium'}}</h5>
       </li>
