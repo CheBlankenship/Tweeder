@@ -26,10 +26,10 @@ app.get('/profile/:userID', function(req, res) {
   ]);
 });
 
-app.get('/world/timeline', function(req,res) {
+app.get('/worldTimeline', function(req,res) {
   Tweet.find().sort('-timestamp')
   .then(function(tweets) {
-    console.log('Timeline: ', tweets);
+    console.log('WORLD Timeline: ', tweets);
     res.json(
       tweets
     );

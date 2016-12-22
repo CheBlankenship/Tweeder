@@ -32,9 +32,9 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
     });
   };
 
-  service.getWorldtimeline = function(userID) {
+  service.getWorldtimeline = function() {
     return $http({
-      url: '/world/timeline' + userID
+      url: '/worldTimeline'
     });
   };
 
@@ -355,14 +355,21 @@ app.controller('SignupController', function($scope, $stateParams, $state, Twitte
   }
 });
 
-// app.controller('TimeLineController', function($scope, $state, TwitterApi, $rootScope) {
-//   TwitterApi.getWorldtimeline.success(function(timelines) {
-//     console.log(timelines);
-//   })
-//   .error(function(err) {
-//     console.log("Error, ", err.message);
+// $scope.world = function() {
+//   TwitterApi.getWorldtimeline().success(function(result) {
+//     console.log(result);
 //   });
 // });
+
+app.controller('TimeLineController', function($scope, $state, TwitterApi, $rootScope) {
+  console.log('CHECK');
+  TwitterApi.getWorldtimeline().success(function(timelines) {
+    console.log(timelines);
+  })
+  .error(function(err) {
+    console.log("Error, ", err.message);
+  });
+});
 
 
 
@@ -389,7 +396,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
     .state({
       name: 'timeline',
-      url: '/world/timeline',
+      url: '/worldTimeline',
       templateUrl: '/templates/timeline.html',
       controller: 'TimeLineController'
     })
