@@ -32,9 +32,9 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
     });
   };
 
-  service.getWorldtimeline = function() {
+  service.getWorldtimeline = function(userID) {
     return $http({
-      url: '/world/timeline'
+      url: '/world/timeline' + userID
     });
   };
 
@@ -181,6 +181,8 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
     // ------------- swich using ig-if ------------------
   }
 
+
+// Change the structure
   else if($rootScope.loginState === false) {
     TwitterApi.getWorldtimeline().success(function(result) {
       $scope.tweets = result;
@@ -353,6 +355,15 @@ app.controller('SignupController', function($scope, $stateParams, $state, Twitte
   }
 });
 
+// app.controller('TimeLineController', function($scope, $state, TwitterApi, $rootScope) {
+//   TwitterApi.getWorldtimeline.success(function(timelines) {
+//     console.log(timelines);
+//   })
+//   .error(function(err) {
+//     console.log("Error, ", err.message);
+//   });
+// });
+
 
 
 
@@ -375,6 +386,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
       url: '/signup',
       templateUrl: '/templates/signup.html',
       controller: 'SignupController'
+    })
+    .state({
+      name: 'timeline',
+      url: '/world/timeline',
+      templateUrl: '/templates/timeline.html',
+      controller: 'TimeLineController'
     })
     .state({
       name: 'home',
