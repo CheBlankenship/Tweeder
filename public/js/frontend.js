@@ -364,7 +364,7 @@ app.controller('SignupController', function($scope, $stateParams, $state, Twitte
 app.controller('TimeLineController', function($scope, $state, TwitterApi, $rootScope) {
   console.log('CHECK');
   TwitterApi.getWorldtimeline().success(function(timelines) {
-    console.log(timelines);
+    $scope.timelines = timelines;
   })
   .error(function(err) {
     console.log("Error, ", err.message);

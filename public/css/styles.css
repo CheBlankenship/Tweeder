@@ -13,6 +13,13 @@ body.ng-scope{
 
 }
 
+/*.background{
+  background-image: url("../img/tw.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size:contain;
+}*/
+
 /* icon */
 img{
   height: 120px;

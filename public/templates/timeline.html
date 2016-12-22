@@ -1,1 +1,11 @@
-<h1>check</h1>
+<!DOCTYPE html>
+<div class="background">
+  <div class="row wrapper">
+    <ul>
+      <li ng-repeat="timeline in timelines" class="tweet tweet-list">
+        <h3>{{timeline.text}}</h3>
+        <h4>{{timeline.timestamp}}</h4>
+      </li>
+    </ul>
+  </div>
+</div>
