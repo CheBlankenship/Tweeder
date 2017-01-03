@@ -171,7 +171,9 @@ const User = mongoose.model("User", {
   password: String,
   website: String,
   avatar_url: String,
-  token:String
+  token:String,
+  location:String,
+  intoduction: String
 });
 
 const Tweet = mongoose.model("Tweet", {

@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <div class="row wrapper">
-      <h1 clss="col-xs-12 you">
-        <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
-        {{userId}}
-      </h1>
-      <button class="follow" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
-      <button class="follow" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
-      <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
-      <form ng-if="loginState === true" method="post" ng-submit="tweet(text)" class="tweetbar">
-        <input type="text" ng-model="text" class="look" placeholder="tweed">
-        <button type="Submit" class="follow tweed">tweed</button>
-      </form>
+  <div class="tweet profile-wrap">
+    <h1 clss="col-xs-12 you">
+      <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
+      {{userId}}
+    </h1>
+    <button class="follow" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
+    <button class="follow" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
+    <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
+    <button class="follow edit-button" ng-if="loginState === true" ng-click="showSubfriend()">Edit</button>
+    <!-- tweeds -->
+    <!-- first -->
+    <a href="#popup1" class="butn"><button class="follow tweed box"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+    <!-- popup -->
+    <div id="popup1" class="overlay">
+      <div class="popup">
+        <form ng-if="loginState === true" method="post" ng-submit="tweet(text)" class="tweetbar">
+          <input type="text" ng-model="text" class="look" placeholder="tweed">
+          <button type="Submit" class="follow tweed" id="CloseBtn"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <!-- tweeds -->
+  </div>
     <ul ng-if="followingUserState === true && tweedState === false && followerState === false">
       <li ng-repeat="result in results" class="tweet">
         <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>

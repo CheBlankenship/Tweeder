@@ -146,6 +146,25 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
 
     // change tweeds, follow and folower by using ng-if
 
+    // popup tweeds text box
+
+
+    // window.onload = function() {
+    // document.getElementById("tweed-button").onclick = function(){
+    //       var overlay = document.getElementById("overlay");
+    //       var popup = document.getElementById("popup");
+    //       overlay.style.display = "block";
+    //       popup.style.display = "block";
+    //   };
+    //
+    // document.getElementById("CloseBtn").onclick = function(){
+    //     var overlay = document.getElementById("overlay");
+    //     var popup = document.getElementById("popup");
+    //     overlay.style.display = "none";
+    //     popup.style.display = "none";
+    //   };
+    // };
+
 
     $scope.showFollowers = function(){
       TwitterApi.getFollower($scope.userId).success(function(results) {
