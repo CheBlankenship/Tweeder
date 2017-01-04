@@ -26,6 +26,18 @@ app.get('/profile/:userID', function(req, res) {
   ]);
 });
 
+app.get('/userInformation/:userID', function(req, res){
+  var theUserID = req.params.userID || req.body.userID;
+  User.findById(theUserID)
+  .then(function(usersInformation) {
+    console.log(usersInformation);
+    res.json(
+      usersInformation
+    );
+  });
+});
+
+
 app.get('/worldTimeline', function(req,res) {
   Tweet.find().sort('-timestamp')
   .then(function(tweets) {

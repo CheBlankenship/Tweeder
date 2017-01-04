@@ -89,6 +89,14 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
     });
   };
 
+
+  service.getUserInformation = function(userID){
+    return $http({
+      url: '/userInformation/' + userID,
+      method: 'GET'
+    });
+  };
+
   service.unFollowUser = function(follower, following) {
     return $http({
       url: '/unfollow/' + follower,
@@ -116,6 +124,7 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
     $scope.userId = $cookies.get('userId');
     TwitterApi.getProfile($scope.userId).success(function(result) {
       $scope.tweets = result;
+      console.log("User info >> ", result);
       $scope.tweedsMount = result.length;
       console.log($scope.tweets);
     })
@@ -123,13 +132,33 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
       console.log('Error: ', err.message);
     });
 
+    $scope.tweedingStatement = false;
+    $scope.letsTweed = function(){
+      if($scope.tweedingStatement === false){
+        $scope.tweedingStatement = true;
+      }
+      else if($scope.tweedingStatement === true){
+        $scope.tweedingStatement = false;
+      }
+    };
 
     $scope.tweet = function(text) {
-      TwitterApi.createTweet($scope.userId, text).success(function(res) {
-        console.log('Tweeted successfully');
-      });
-      $state.go('home', {}, {reload: true});
+      var lenlen = text.length;
+      if(lenlen > 0){
+        TwitterApi.createTweet($scope.userId, text).success(function(res) {
+          console.log('Tweeted successfully');
+        });
+        $state.go('home', {}, {reload: true});
+      }
     };
+
+    TwitterApi.getUserInformation($scope.userId).success(function(usersInformation){
+      console.log(usersInformation);
+      $scope.usersInformation = usersInformation;
+    })
+    .error(function(err) {
+      console.log(err.message);
+    });
 
 
     TwitterApi.getSubfriends($scope.userId).success(function(results) {
@@ -143,28 +172,6 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
       $scope.numberOfFollowers = results.length;
       console.log($scope.numberOfFollowers);
     });
-
-    // change tweeds, follow and folower by using ng-if
-
-    // popup tweeds text box
-
-
-    // window.onload = function() {
-    // document.getElementById("tweed-button").onclick = function(){
-    //       var overlay = document.getElementById("overlay");
-    //       var popup = document.getElementById("popup");
-    //       overlay.style.display = "block";
-    //       popup.style.display = "block";
-    //   };
-    //
-    // document.getElementById("CloseBtn").onclick = function(){
-    //     var overlay = document.getElementById("overlay");
-    //     var popup = document.getElementById("popup");
-    //     overlay.style.display = "none";
-    //     popup.style.display = "none";
-    //   };
-    // };
-
 
     $scope.showFollowers = function(){
       TwitterApi.getFollower($scope.userId).success(function(results) {

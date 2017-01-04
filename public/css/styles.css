@@ -77,17 +77,21 @@ button:focus {
 .look{
   height:50px;
   width: 400px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 0.5px solid gray;
   text-align: center;
   font-size: 30px;
 }
 
+
+
 .look:focus{
   outline:0;
 }
 
-
+.tweed-box{
+  height: 60px;
+}
 
 .follow{
   background-color: #f1f7f7;
@@ -212,14 +216,21 @@ h1.ng-binding{
 
 .profile-wrap{
   background-color: lightgray;
+  text-align: center;
 }
 
 .edit-button{
   color :orange;
 }
 
+.usersInformation{
+  font-size: 40px;
+}
 
-.butn{
+.follow.tweed.box.red{
+  background-color: red;
+}
+/*.butn{
   cursor: pointer;
   transition: all 0.3s ease-out;
 }
@@ -248,7 +259,7 @@ h1.ng-binding{
   width: 30%;
   position: relative;
   transition: all 5s ease-in-out;
-}
+}*/
 
 
 
