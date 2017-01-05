@@ -112,6 +112,31 @@ app.get('/follower/:userID', function(req, res) {
 
 });
 
+app.post('/edit/:userID', function(req,res) {
+  var theUserID = req.params.userID || req.body.userID;
+  db.Users.update(
+    { username : theUserID },
+    {
+      username: req.body._id,
+
+    },
+  { upsert: true}
+)
+.then(function(result) {
+  console.log(result);
+});
+});
+
+
+// db.people.update(
+//    { name: "Andy" },
+//    {
+//       name: "Andy",
+//       rating: 1,
+//       score: 1
+//    },
+//    { upsert: true }
+// )
 
 app.post('/tweet/:userID/:text', function(req, res) {
   Tweet.create({

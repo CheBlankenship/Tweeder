@@ -13,7 +13,7 @@
     <button class="follow" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
     <button class="follow" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
     <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
-    <a href=""><button class="follow edit-button" ng-if="loginState === true">Edit</button></a>
+    <button class="follow edit-button" ng-if="loginState === true" ng-click="editUrSelf()">Edit</button>
     <button class="follow tweed box" ng-if="tweedingStatement === false" ng-click="letsTweed()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
     <button class="follow tweed box red" ng-if="tweedingStatement === true" ng-click="letsTweed()"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>

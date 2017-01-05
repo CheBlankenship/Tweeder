@@ -21,9 +21,9 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
     console.log('Logout');
     $cookies.remove('token');
     $cookies.remove('userId');
-    $state.go('home', {}, {reload: true});
-    location.reload();
-    console.log("check");
+    $state.go('timeline', {}, {reload: true});
+    // location.reload();
+    // console.log("check");
   };
 
   service.getProfile = function(userID) {
@@ -203,6 +203,10 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
       $scope.followerState = false;
       $scope.tweedState = true;
       // location.reload();
+    };
+
+    $scope.editUrSelf = function() {
+      $state.go("edit");
     };
     // ------------- swich using ig-if ------------------
   }
@@ -425,6 +429,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
       url: '/worldTimeline',
       templateUrl: '/templates/timeline.html',
       controller: 'TimeLineController'
+    })
+    .state({
+      name: 'edit',
+      url: '/edit',
+      templateUrl: '/templates/edit_profile.html',
+      controller: 'EditController'
     })
     .state({
       name: 'home',

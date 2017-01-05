@@ -90,6 +90,7 @@ button:focus {
 }
 
 .tweed-box{
+  text-align: center;
   height: 60px;
 }
 
@@ -227,8 +228,21 @@ h1.ng-binding{
   font-size: 40px;
 }
 
+.follow.tweed.box{
+  border: none;
+}
+
 .follow.tweed.box.red{
   background-color: red;
+  border: none;
+}
+
+.search-box{
+  width: 338px;
+}
+
+.stick{
+  position: absolute;
 }
 /*.butn{
   cursor: pointer;
