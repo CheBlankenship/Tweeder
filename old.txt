@@ -1,0 +1,3 @@
+<!-- <input class="look search-box stick" type="text" ng-model="searchUser" value="" placeholder="search user"> -->
+<a ui-sref="profile({userID: searchUser})"><button type="button" name="button" class="follow"><i class="fa fa-search" aria-hidden="true"></i>
+</button></a>

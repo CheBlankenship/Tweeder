@@ -6,8 +6,8 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var bodyParser = require('body-parser');
-const token = "define it later";
-const uuid = require("node-uuid");
+var token = "define it later";
+var uuid = require("node-uuid");
 
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -25,6 +25,32 @@ app.get('/profile/:userID', function(req, res) {
     })
   ]);
 });
+
+// DB schema
+var User = mongoose.model("User", {
+  _id: String, // this will be @username and uniqe
+  username: String, // It can be any name youwant
+  password: String,
+  website: String,
+  token:String,
+  location_name:String,
+  introduction: String
+});
+
+// db.insert.
+
+var Tweet = mongoose.model("Tweet", {
+  text: String,
+  timestamp: Date,
+  userID: String // points to User._id
+});
+
+var Follow = mongoose.model("Follow", {
+  follower: String,
+  following: String
+});
+
+// app.get()
 
 app.get('/userInformation/:userID', function(req, res){
   var theUserID = req.params.userID || req.body.userID;
@@ -84,6 +110,8 @@ app.post('/signup', function(req, res) {
     password: req.body.password,
     website: req.body.website,
     avatar_url: req.body.avatar_url,
+    location_name:req.body.location_name,
+    introduction: req.body.introduction,
     token: uuid.v4()
   });
 });
@@ -112,18 +140,46 @@ app.get('/follower/:userID', function(req, res) {
 
 });
 
+// db.User.update(
+//     { "_id" : "zack" },
+//     { $set:
+//     {
+//       "_id": "z",
+//       "password": "z",
+//       "website": "z",
+//       "avatar_url": "z",
+//       "location_name":"z",
+//       "introduction": "z"
+//     }
+//   }
+// )
+
 app.post('/edit/:userID', function(req,res) {
   var theUserID = req.params.userID || req.body.userID;
-  db.Users.update(
-    { username : theUserID },
+  console.log("I>>>>>>>>>>>>>>>>>>>>>>>>>>> ", theUserID);
+  User.update(
+    { _id : theUserID },
+    { $set:
     {
-      username: req.body._id,
-
-    },
-  { upsert: true}
+      _id: req.body._id,
+      password: req.body.password,
+      website: req.body.website,
+      avatar_url: req.body.avatar_url,
+      location_name:req.body.location_name,
+      introduction: req.body.introduction
+    }
+  }
 )
 .then(function(result) {
-  console.log(result);
+  console.log("DIDI got it? >> ", result);
+  res.status(200);
+  res.json({
+    result: result
+  });
+})
+.error(function(err) {
+  console.log("Error >> " , err.message);
+  res.status(400);
 });
 });
 
@@ -202,27 +258,6 @@ app.post('/unfollow/:userID', function(req, res) {
 //   });
 // });
 
-
-const User = mongoose.model("User", {
-  _id: String, // actually the username
-  password: String,
-  website: String,
-  avatar_url: String,
-  token:String,
-  location:String,
-  intoduction: String
-});
-
-const Tweet = mongoose.model("Tweet", {
-  text: String,
-  timestamp: Date,
-  userID: String // points to User._id
-});
-
-const Follow = mongoose.model("Follow", {
-  follower: String,
-  following: String
-});
 
 app.listen(3000, function() {
   console.log('Listening on 3000');

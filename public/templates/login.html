@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <div class="row wrapper">
-    <form method="post" ng-submit="userLogin(userId, password)">
-      <h3>username</h3>
-      <input type="text" ng-model="userId" class="look">
-      <h3>password</h3>
-      <input type="password" ng-model="password" class="look">
-      <button type="submit" class="follow">Login</button>
+    <form method="post" ng-submit="userLogin(userId, password)" class="profile-wrap login-wrap">
+      <label class="head-menu black sp-50">username</label><br>
+      <input type="text" ng-model="userId" class="search-box" placeholder="username"><br>
+      <label class="head-menu black sp-50">password</label><br>
+      <input type="password" ng-model="password" class="search-box" placeholder="password"><br>
+      <button type="submit" class="follow sp-50">Login</button>
     </form>
 </div>

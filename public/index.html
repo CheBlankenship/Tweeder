@@ -13,27 +13,74 @@
     <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
     <title>tweeder</title>
   </head>
-  <body ng-app="Twitter">
-    <div class="container-fluid">
-      <div class="row">
-        <h1 class="col-xs-12 title"><span>t</span><img src="img/moyou.png" class="ww"><span>ee</span><span>dr</span>
-        <img src="img/jacket.svg" alt="jacket_icon" class="title-jacket"/>
-      </h1>
+  <body ng-app="Twitter" ng-controller="HelloController">
+    <!-- Header when your not login -->
+    <div class="row">
+      <!-- re -->
+      <ul class="col-xs-12 header" ng-if="loginState === false">
+        <!-- <li class="inline">
+          <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
+        </li> -->
+        <li class="inline head-menu">
+          <!-- <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/> -->
+          Tweedr
+        </li>
+        <li class="inline sp-30">
+          <a ui-sref="login()"><button class="head-menu stick"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</button></a>
+        </li>
+        <li class="inline sp-30">
+          <a ui-sref="signup()"><button class="head-menu stick"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Signup</button></a>
+        </li>
+        <!-- search -->
+        <li class="inline right">
+          <input class="search-box stick black" type="text" ng-model="searchUser" value="" placeholder="search user">
+          <a ui-sref="profile({userID: searchUser})"><button type="button" name="button" class="head-menu"><i class="fa fa-search" aria-hidden="true"></i>
+          </button></a>
+        </li>
+        <li class="inline sp-30 right sp-10">
+          <a ui-sref="world()"><button type="button" name="button" class="head-menu"><span><i class="fa fa-globe" aria-hidden="true"></i></span>World timeline</button></a>
+        </li>
+    </ul>
+      <!--  -->
+    <ul class="col-xs-12 header" ng-if="loginState === true">
+      <li class="inline">
+        <a ui-sref="home()"><button type="button" name="button" class="head-menu stick" ng-if="loginState === true"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></button></a>
+      </li>
+      <li class="inline sp-30">
+        <button ng-click="logout()" ng-if="loginState === true" class="head-menu stick"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>Logout</button>
+      </li>
+      <li class="inline head-menu sp-30">
+        <!-- <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/> -->
+        Tweedr
+      </li>
+      <!-- search -->
+      <li class="inline right">
+        <input class="search-box stick black" type="text" ng-model="searchUser" value="" placeholder="search user">
+        <a ui-sref="profile({userID: searchUser})"><button type="button" name="button" class="head-menu"><i class="fa fa-search" aria-hidden="true"></i>
+        </button></a>
+      </li>
+      <li class="inline sp-30 right sp-10">
+        <a ui-sref="world()"><button type="button" name="button" class="head-menu"><span><i class="fa fa-globe" aria-hidden="true"></i></span>World timeline</button></a>
+      </li>
+    </ul>
       </div>
-
-      <div class="row">
-        <div class="col-xs-12 search">
-          <!-- <button ng-click="world()">world</button> -->
-          <a ui-sref="home()"><button type="button" name="button" class="follow stick">Home</button></a>
-          <a ui-sref="login()" ng-if="loginState === false"><button class="follow stick">Login</button></a>
-          <button ng-click="logout()" ng-if="loginState === true" class="follow stick">Logout</button>
-          <a ui-sref="signup()" ng-if="loginState === false"><button class="follow">Signup</button></a>
-          <input class="look search-box stick" type="text" ng-model="searchUser" value="" placeholder="search user">
-          <a ui-sref="profile({userID: searchUser})"><button type="button" name="button" class="follow">Search</button></a>
-        </div>
-      </div>
-      <ui-view></ui-view>
+<div class="row">
+  <div class="col-xs-12 top">
+    <div class="center">
+        <ui-view>
+          <!-- <div class="" ng-if="worldStatement === false">
+            <ul>
+              <li ng-repeat="timeline in timelines" class="tweet tweet-list">
+                <p>{{timeline.userID}}</p>
+                <p>{{timeline.text}}</p>
+                <p>{{timeline.timestamp}}</p>
+              </li>
+            </ul>
+          </div> -->
+        </ui-view>
     </div>
+  </div>
+</div>
   </body>
 
 </html>

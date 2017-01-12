@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <div class="row wrapper">
   <div class="tweet profile-wrap">
-    <h1 clss="col-xs-12 you">
-      <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
-      {{userId}}
-    </h1>
-    <div class="usersInformation">
-      {{usersInformation.introduction}}
-      <br>
-      <h3>Location : {{usersInformation.location}}</h3>
+    <div clss="col-xs-12 you">
+      <div class="profile-img">
+        <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
+        <h1 class="white">{{userId}}</h1>
+      </div>
     </div>
-    <button class="follow" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
-    <button class="follow" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
-    <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
-    <button class="follow edit-button" ng-if="loginState === true" ng-click="editUrSelf()">Edit</button>
-    <button class="follow tweed box" ng-if="tweedingStatement === false" ng-click="letsTweed()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+
+    <div class="usersInformation">
+      <p>{{usersInformation.avatar_url}}</p>
+      <br>
+      <p>{{usersInformation.intoduction}}</p>
+      <br>
+      <p>Location :<span class="underLine">{{usersInformation.location_name}}</span></p>
+    </div>
+    <button class="follow fo" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
+    <button class="follow fo" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
+    <button class="follow fo" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
+    <!-- Edit bottom add this functionality later -->
+    <a ui-sref="edit()" class="follow black"><button class="follow edit-button" ng-if="loginState === true">Edit</button></a>
+    <!-- <a ui-sref="{userId}"><button class="follow edit-button" ng-if="loginState === true" ng-click="editUrSelf(editId)">Edit</button></a> -->
+    <button class="follow tweed box fo" ng-if="tweedingStatement === false" ng-click="letsTweed()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
     <button class="follow tweed box red" ng-if="tweedingStatement === true" ng-click="letsTweed()"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
     <div ng-if="tweedingStatement === true">
@@ -30,7 +37,7 @@
         <a ui-sref="profile({userID: tweet.userID})" class="user">{{result.following}}</a>
       </li>
     </ul>
-    <ul ng-if="followingUserState === false && tweedState === false && followerState === true">
+    <ul ng-if="followingUserState === false && tweedState === false && followerState === true" class="col-xs-6 left">
       <li ng-repeat="follower in followers" class="tweet">
         <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
         <a ui-sref="profile({userID: tweet.userID})" class="user">{{follower.follower}}</a>
@@ -46,4 +53,7 @@
         <h5>{{tweet.timestamp | date:'medium'}}</h5>
       </li>
     </ul>
+    <div ng-if="followingUserState === false && tweedState === false && followerState === false && editState === true" class="">
+
+    </div>
 </div>

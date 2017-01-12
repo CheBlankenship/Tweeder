@@ -1,28 +1,29 @@
 var app = angular.module('Twitter', ['ui.router', 'ngCookies']);
 
-app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, $state) {
-  var service = {};
 
+app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, $state) {
+  //-------------------------------
+  $rootScope.worldStatement = false;
+  $rootScope.loginState = false;
   //Login
   if ($cookies.get('token')) {
     $rootScope.loginState = true;
+    console.log($rootScope.loginState);
   }
 
   else if (!$cookies.get('token')) {
     $rootScope.loginState = false;
+    console.log($rootScope.loginState);
   }
 
-
-
-
-  //-------------------------------
+  var service = {};
 
   $rootScope.logout = function() {
     console.log('Logout');
     $cookies.remove('token');
     $cookies.remove('userId');
-    $state.go('timeline', {}, {reload: true});
-    // location.reload();
+    // $state.go('world', {}, {reload: true});
+    location.reload();
     // console.log("check");
   };
 
@@ -58,7 +59,7 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
     });
   };
 
-  service.userSignup = function(userId, password, website, avatar_url){
+  service.userSignup = function(userId, password, website, avatar_url, location_name, introduction){
     return $http({
       url: '/signup',
       method: 'POST',
@@ -66,7 +67,32 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
         _id : userId,
         password: password,
         website: website,
-        avatar_url: avatar_url
+        avatar_url: avatar_url,
+        location_name: location_name,
+        introduction: introduction
+      }
+    });
+  };
+
+  // service.edit = function(userID) {
+  //   var tokenID = $cookies.get('token');
+  //   return $http ({
+  //     url: '/edit/' + userID + '/' + tokenID
+  //   });
+  // };
+
+  service.userUpdate = function(userID, password, website, avatar_url, location_name, introduction) {
+    return $http({
+      url: '/edit/' + userID,
+      method: 'POST',
+      data: {
+        // username: userId,
+        _id: userID,
+        password: password,
+        website: website,
+        avatar_url: avatar_url,
+        location_name: location_name,
+        introduction: introduction
       }
     });
   };
@@ -113,6 +139,7 @@ app.factory("TwitterApi", function factoryFunction($http, $rootScope, $cookies, 
 
 
 app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, $rootScope) {
+
   if($rootScope.loginState === true){
     $scope.tweedState = true;
     $scope.followerState = false;
@@ -124,7 +151,7 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
     $scope.userId = $cookies.get('userId');
     TwitterApi.getProfile($scope.userId).success(function(result) {
       $scope.tweets = result;
-      console.log("User info >> ", result);
+      console.log("User tweed >> ", result);
       $scope.tweedsMount = result.length;
       console.log($scope.tweets);
     })
@@ -153,7 +180,7 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
     };
 
     TwitterApi.getUserInformation($scope.userId).success(function(usersInformation){
-      console.log(usersInformation);
+      console.log("Users home info >> ", usersInformation);
       $scope.usersInformation = usersInformation;
     })
     .error(function(err) {
@@ -204,8 +231,10 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
       $scope.tweedState = true;
       // location.reload();
     };
-
-    $scope.editUrSelf = function() {
+    var editId = $scope.userId;
+    $scope.edit = function(){
+      // var cookieId = $cookies.get('token');
+      console.log(cookieId);
       $state.go("edit");
     };
     // ------------- swich using ig-if ------------------
@@ -216,14 +245,58 @@ app.controller('HomeController', function($scope, $cookies, TwitterApi, $state, 
   else if($rootScope.loginState === false) {
     TwitterApi.getWorldtimeline().success(function(result) {
       $scope.tweets = result;
+      console.log("CHEKV >>", result);
+      $state.go("world");
+      location.reload();
     });
   }
+});
 
+app.controller('HelloController', function($scope, $stateParams, TwitterApi, $cookies, $state, $rootScope){
+  $rootScope.loginState = false;
+  // $scope.searchWorld = false;
+  // $scope.welcomeAll = false;
+  //Login
+  if ($cookies.get('token')) {
+    $rootScope.loginState = true;
+    console.log($rootScope.loginState);
+    $state.go('home');
+  }
 
+  else if (!$cookies.get('token')) {
+    $rootScope.loginState = false;
+    console.log($rootScope.loginState);
+    console.log('CHECK');
+    TwitterApi.getWorldtimeline().success(function(timelines) {
+      $scope.timelines = timelines;
+      console.log(timelines);
+      $state.go('world');
+    })
+    .error(function(err) {
+      console.log("Error, ", err.message);
+    });
+
+    $scope.searchTheWorld = function() {
+      $scope.searchWorld = true;
+      $scope.welcomeAll = true;
+    };
+
+    $scope.world = function() {
+      $state.go('world');
+    };
+  }
 });
 
 app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $cookies, $state, $rootScope) {
   console.log($stateParams.userID);
+  $rootScope.logout = function() {
+    console.log('Logout');
+    $cookies.remove('token');
+    $cookies.remove('userId');
+    $state.go('world', {}, {reload: true});
+    location.reload();
+    // console.log("check");
+  };
   if($rootScope.loginState === true){
     $scope.userId = $cookies.get('userId');
     console.log($scope.userId);
@@ -263,6 +336,16 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
         }
       }
     });
+
+    TwitterApi.getUserInformation($stateParams.userID).success(function(usersInformation){
+      console.log("Users home info >> ", usersInformation);
+      $scope.usersInformation = usersInformation;
+    })
+    .error(function(err) {
+      console.log(err.message);
+    });
+
+
     // When I click, it gets the follower persons info and shows it
     $scope.showFollowers = function(){
       console.log("IM clicking this btn");
@@ -287,7 +370,9 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
     };
 
     TwitterApi.getProfile($stateParams.userID).success(function(result) {
+      $scope.worldStatement = true;
       $scope.tweets = result;
+      console.log("$scope.tweets >> ", result);
       $scope.tweedsMount = result.length;
       console.log($scope.tweets);
       TwitterApi.getSubfriends($cookies.get('userId')).success(function(result) {
@@ -352,7 +437,6 @@ app.controller('ProfileController', function($scope, $stateParams, TwitterApi, $
 
 app.controller('LoginController', function($scope, $stateParams, $state, $cookies, TwitterApi, $rootScope) {
   $scope.userLogin = function(userId, password){
-
     TwitterApi.getUserLogin(userId, password).success(function(result) {
       if (result !== null) {
         if (result === 'nope'){
@@ -376,8 +460,9 @@ app.controller('LoginController', function($scope, $stateParams, $state, $cookie
 
 app.controller('SignupController', function($scope, $stateParams, $state, TwitterApi, $rootScope) {
   if($rootScope.loginState === false) {
-    $scope.userSignup = function(userId, password, website, avatar_url) {
-      TwitterApi.userSignup(userId, password, website, avatar_url).success(function(result) {
+    $scope.userSignup = function(userId, password, website, avatar_url, location_name, introduction) {
+      TwitterApi.userSignup(userId, password, website, avatar_url, location_name, introduction).success(function(result) {
+        console.log("Check if I m in");
         console.log(result);
       });
       $state.go('login', {}, {reload: true});
@@ -385,27 +470,38 @@ app.controller('SignupController', function($scope, $stateParams, $state, Twitte
   }
 });
 
-// $scope.world = function() {
-//   TwitterApi.getWorldtimeline().success(function(result) {
-//     console.log(result);
-//   });
-// });
-
-app.controller('TimeLineController', function($scope, $state, TwitterApi, $rootScope) {
-  console.log('CHECK');
-  TwitterApi.getWorldtimeline().success(function(timelines) {
-    $scope.timelines = timelines;
-  })
-  .error(function(err) {
-    console.log("Error, ", err.message);
-  });
+app.controller('EditController', function($scope, $stateParams, $state, TwitterApi, $rootScope, $cookies) {
+  // var token = $cookies.get('token');
+  // console.log(token);
+  console.log("If IM in here");
+  $scope.userUpdate = function(userId, password, website, avatar_url, location_name, introduction){
+    console.log("Call update func");
+    TwitterApi.userUpdate(userId, password, website, avatar_url, location_name, introduction).success(function(result) {
+      console.log("Edit result >> ", result);
+    })
+    .error(function(err) {
+      console.log("ERROR >> ", err.message);
+    });
+    // $state.go('home', {}, {reload: true});
+  };
 });
-
 
 
 
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+  // .state({
+  //   name: 'hello',
+  //   url: '/',
+  //   templateUrl: 'index.html',
+  //   controller: 'HelloController'
+  // })
+    .state({
+      name: 'home',
+      url: '/home',
+      templateUrl: '/templates/home.html',
+      controller: 'HomeController'
+    })
     .state({
       name: 'profile',
       url: '/profileInfo/{userID}',
@@ -425,21 +521,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
       controller: 'SignupController'
     })
     .state({
-      name: 'timeline',
-      url: '/worldTimeline',
-      templateUrl: '/templates/timeline.html',
-      controller: 'TimeLineController'
+      name: 'world',
+      url: '/world',
+      templateUrl: '/templates/world.html',
+      // controller: 'WorldController'
     })
     .state({
       name: 'edit',
       url: '/edit',
       templateUrl: '/templates/edit_profile.html',
       controller: 'EditController'
-    })
-    .state({
-      name: 'home',
-      url: '/home',
-      templateUrl: '/templates/home.html',
-      controller: 'HomeController'
     });
 });

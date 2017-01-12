@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<div class="row wrapper">
+  <div class="profile-wrap tweet world-bar">
+    <p>World timeline</p><br>
+    <p>See what's happening</p>
+  </div>
+
+  <div class="background">
+      <ul>
+        <li ng-repeat="timeline in timelines" class="tweet tweet-list">
+          <p>{{timeline.userID}}</p>
+          <p>{{timeline.text}}</p>
+          <p>{{timeline.timestamp}}</p>
+        </li>
+      </ul>
+    </div>
+</div>

@@ -1,0 +1,308 @@
+/*html{
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}*/
+body.ng-scope{
+  font-family: 'Harmattan', sans-serif;
+  /*background-color: #009999;*/
+  /*background-image: url('../img/blue.jpg');*/
+  /*height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;*/
+
+}
+
+/*.background{
+  background-image: url("../img/tw.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size:contain;
+}*/
+
+/* icon */
+img{
+  height: 120px;
+  width: 120px;
+}
+.jacket{
+  background-color: white;
+  border-radius: 10px;
+}
+
+.title-jacket{
+  background-color: none;
+  margin-top: 10px;
+}
+
+.fa .fa-user-plus{
+  height: 50px;
+  width: 50px;
+}
+
+.ww{
+  height: 35px;
+  width: 35px;
+  border: 5px solid #009999;
+}
+
+
+ul{
+  list-style: none;
+  padding: 0;
+}
+
+
+button:focus {
+  outline:0;
+}
+
+
+.title{
+  color: #009999;
+  background-color: #f1f7f7;
+  font-size: 100px;
+  text-align: center;
+}
+
+.tweetbar{
+  text-align: center;
+}
+
+.follow.tweed{
+  background-color: #009999;
+  color: white;
+}
+
+.look{
+  height:50px;
+  width: 400px;
+  border-radius: 5px;
+  border: 0.5px solid gray;
+  text-align: center;
+  font-size: 30px;
+}
+
+
+
+.look:focus{
+  outline:0;
+}
+
+.tweed-box{
+  text-align: center;
+  height: 60px;
+}
+
+.follow{
+  background-color: #f1f7f7;
+  /*background-color: white;*/
+  color: black;
+  padding: 10px 30px 10px;
+  font-size: 20px;
+  border: 0.5px solid #f1f7f7;
+  border-radius: 10px;
+}
+
+.following{
+  background-color: white;
+}
+
+.follower{
+  background-color: red;
+}
+
+
+.followBtn{
+  color: white;
+  background-color: #85bef7;
+  font-weight: bold;
+}
+
+.followingBtn{
+  color: black;
+  background-color: white;
+  font-weight: bold;
+  border: none;
+}
+
+
+
+.userid{
+  display: inline-block;
+  font-size: 50px;
+}
+
+.user{
+  display: inline-block;
+}
+
+/*div.row.wrap.ng-scope{
+  display: inline-block;
+  text-align: center;
+}*/
+
+.profile{
+  background-color: rgba(124, 124, 124, 0.2);
+  /*padding: 5px;*/
+  /*border: 4px solid lightgray;*/
+  /*border-radius: 20px;*/
+  text-align: center;
+  /*display: inline-block;*/
+}
+
+
+.wrapper {
+  margin: 0 auto;
+  width: 70%;
+  max-width: 960px;
+}
+
+
+
+/* --- PROFILE PAGE --- */
+
+.tweet-list {
+  text-align: center;
+}
+
+.tweet {
+  background: #f1f7f7;
+  margin: 2rem 0 auto;
+  padding: 1rem;
+  border-radius: 20px;
+}
+
+
+.search{
+  height: 100px;
+  text-align: center;
+}
+
+ul.followingUsers.ng-scope{
+  border: 4px solid gray;
+  border-radius: 20px;
+}
+
+h1.ng-binding{
+  display: inline-block;
+}
+
+.you{
+  background-color: rgba(255,255,255,0.4);
+  height: 200px;
+  width: 400px;
+  border-radius: 60px;
+  float: left;
+}
+
+
+.profile{
+  background-color: white;
+}
+
+.backgray{
+  background-color: #f1f7f7;
+}
+
+.followNumbers{
+  background-color: #009999;
+  color: white;
+  margin-left: 5px;
+  width: 30px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: inline-block;
+}
+
+.profile-wrap{
+  background-color: lightgray;
+  text-align: center;
+}
+
+.edit-button{
+  color :orange;
+}
+
+.usersInformation{
+  font-size: 40px;
+}
+
+.follow.tweed.box{
+  border: none;
+}
+
+.follow.tweed.box.red{
+  background-color: red;
+  border: none;
+}
+
+.search-box{
+  width: 338px;
+}
+
+/*.stick{
+  position: absolute;
+}*/
+/*.butn{
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup{
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}*/
+
+
+
+
+
+
+
+/*#overlay {
+    display:none;
+    position:fixed;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100%;
+    background:#000;
+    opacity:0.5;
+    z-index:99999;
+}
+
+#popup {
+    display:none;
+    position:fixed;
+    left:50%;
+    top:50%;
+    width:300px;
+    height:150px;
+    margin-top:-75px;
+    margin-left:-150px;
+    background:#FFFFFF;
+    border:2px solid #000;
+    z-index:100000;
+}*/

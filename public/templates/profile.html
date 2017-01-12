@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <!-- When u search  -->
 <div class="row wrapper">
-    <div class="row">
-      <div class="col-xs-12 profile">
-        <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
-        <h3 class="userid">{{tweets[0].userID}}</h3>
+    <div class="tweet profile-wrap">
+      <div class="col-xs-12 you">
+        <div class="profile-img">
+          <img src="img/jacket.svg" alt="jacket_icon" class="jacket"/>
+          <h1 class="white fo">{{usersInformation._id}}</h1>
+        </div>
+      </div>
+
+        <div class="usersInformation">
+          <p>{{usersInformation.avatar_url}}</p>
+          <br>
+          <p>{{usersInformation.intoduction}}</p>
+          <br>
+          <h3>Location : {{usersInformation.location_name}}</h3>
+        </div>
         <button class="follow followBtn" ng-if="loginState === true && connectingStatement === true" ng-click="follow()" ng-show="userStatement">
           <i class="fa fa-user-plus" aria-hidden="true"></i>
         </button>
-        <button class="follow following" ng-if="loginState === true && connectingStatement === false" ng-click="unfollow()">Following</button>
-        <button class="follow" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
-        <button class="follow" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
-        <button class="follow" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
+        <button class="follow following fo" ng-if="loginState === true && connectingStatement === false" ng-click="unfollow()">Following</button>
+        <button class="follow fo" ng-if="loginState === true" ng-click="tweeds()">Tweeds<span class="followNumbers">{{tweedsMount}}</span></button>
+        <button class="follow fo" ng-if="loginState === true" ng-click="showFollowers()">Follower<span class="followNumbers">{{numberOfFollowers}}</span></button>
+        <button class="follow fo" ng-if="loginState === true" ng-click="showSubfriend()">Follow<span class="followNumbers">{{number}}</span></button>
       </div>
-    </div>
+    <!-- </div> -->
 
 
     <div class="row" ng-if="followingUserState === false && tweedState === true && followerState ===false">

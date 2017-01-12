@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <div class="row wrapper">
-  <form method="post" ng-submit="userSignup(userId, password ,website, avatar_url)">
-    <label>username</label>
-    <input type="text" ng-model="userId" value="username">
-    <label>password</label>
-    <input type="text" ng-model="password" value="password">
-    <label>website</label>
-    <input type="text" ng-model="website" value="website">
-    <label>avatar url</label>
-    <input type="text" ng-model="avatar_url" value="avatar_url">
-    <label>Location</label>
-    <input type="text" ng-model="avatar_url" value="avatar_url">
-    <label>Introduction</label>
-    <input type="text" ng-model="avatar_url" value="avatar_url">
-    <button type="submit">Save change</button>
-  </form>
+  <form method="post" ng-submit="userUpdate(userId, password ,website, avatar_url, location, introduction)" class="profile-wrap login-wrap hi-800">
+    <label class="head-menu black sp-50">username</label><br>
+    <input type="text" ng-model="userId" value="username" class="search-box"><br>
+    <label class="head-menu black sp-50">password</label><br>
+    <input type="text" ng-model="password" value="password" class="search-box"><br>
+    <label class="head-menu black sp-50">website</label><br>
+    <input type="text" ng-model="website" value="website" class="search-box"><br>
+    <label class="head-menu black sp-50">avatar url</label><br>
+    <input type="text" ng-model="avatar_url" value="avatar_url" class="search-box"><br>
+    <label class="head-menu black sp-50">Location</label><br>
+    <input type="text" ng-model="location" value="location" class="search-box"><br>
+    <label class="head-menu black sp-50">Introduction</label><br>
+    <input type="text" ng-model="introduction" value="introduction" class="search-box"><br>
+    <button type="submit" class="follow sp-50">Save change</button>
+  </form><br>
 </div>
