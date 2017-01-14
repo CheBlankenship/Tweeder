@@ -1,9 +1,11 @@
-# **Tweeder**
+# **Tweedr**
+
+
 
 ##### [Live Project](/ put the url /)   |  [Overview](/ put the github url /) |   [What I Used](#what-we-used)   |   [MVP]()   |   [Challenges](#challenges)   |   [High light code](#code)   | [Screenshots](#screenshots)|[Contributing](#contribute-to-tweeder)
 
 ### Overview
-This is my first
+This is a Twitter-clone web app to know how Twitter is working. Using new
 
 #### Our conceputual goals for the site
 * goal 1
@@ -14,29 +16,11 @@ This is my first
     * write here
 
 ### Github Link
-###### [Tweeder](http://...)
+###### [Tweedr](http://...)
 
 
-### Team Members
-
-* #### [Keyur patel](https://github.com/ekeyur)
-  ###### **\(Task)**
-  **Contributions: **
-
-
-* #### [Autumn Coleman](https://github.com/AutumnColeman)
-  ###### **\(UX/UI design / Front-end organizer)**
-  **Contributions: **
-
-
-* #### [Che Blankenship](https://github.com/CheBlankenship)
-  ###### **\(Task)**
-  **Contributions: **
-
-### What we used
+### What I used
 #### **Languages**
-* **mongoDB**
-
 * **HTML**
 
 * **CSS**
@@ -45,23 +29,26 @@ This is my first
   * Angular JS
   * Node JS
 
+
+* **mongoDB**
+
 #### **Frameworks**
   * Flask
   *
   *
 
 #### API
-  * [BreweryDB.com](http://www.brewerydb.com/)
+  * [hopscotch](https://github.com/linkedin/hopscotch)
 
 
 #### Other
   * AWS
   * Apache
-  * Add icon source and url later....
+  * Icon image : Jacket icon by Mourad Mokrane from the Noun Project
 
 
 ### MVP (Minimum Viable Product)
-Beer App is .... Many writers struggle to write sentences of appropriate length.  Some writers write short sentences, which can make an essay seem choppy.  Other writers tend to write long sentences, which can make the writing seem long-winded or wordy, even if it isn’t.  Good writing contains sentences of a variety of lengths: some short, some long, some medium.  This page provides some suggestions for intentionally changing sentence length.
+Tweedr
 
 #### **Initial Goals**
   * Add the Initial goals here...
